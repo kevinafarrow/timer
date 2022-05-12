@@ -3,10 +3,11 @@
 	import ClockDisplay from './ClockDisplay.svelte';
 	import PlanetDisplay from './PlanetDisplay.svelte';
 
-  let timers = [
+  let timers = [];
+  let timers_1 = [
     {"lane": "lane1", "mask": "lane-mask1", "border": 90, "duration": 30, "pos": 360},
   ]
-  let timers_1 = [
+  let timers_2 = [
     {"lane": "lane1", "mask": "lane-mask1", "border": 90, "duration": 70, "pos": 360},
     {"lane": "lane2", "mask": "lane-mask2", "border": 84, "duration": 60, "pos": 360},
     {"lane": "lane3", "mask": "lane-mask3", "border": 78, "duration": 50, "pos": 360},
@@ -16,15 +17,29 @@
     {"lane": "lane7", "mask": "lane-mask7", "border": 54, "duration": 10, "pos": 360}
   ];
   let numTimers = timers.length;
+
+  timers = timers_1;
+
+  function toggleTimer() {
+	  if (timers === timers_1) {
+      timers = timers_2;
+    } else if (timers === timers_2) {
+      timers = timers_1;
+    };
+  };
 </script>
 
 <main>
 	<h1>{name}</h1>
-  {#if numTimers > 1}
+  {#if timers.length > 1}
 	  <PlanetDisplay {timers}/>
   {:else}
 	  <ClockDisplay {timers}/>
   {/if}
+
+  <button on:click={toggleTimer}>
+    Demo toggle
+  </button>
 </main>
 
 <style>
@@ -51,4 +66,10 @@
 	:global(body) {
 		background-color: black;
 	}
+  button {
+    background-color: #ff3e00;
+    border: none;
+    margin: 1em;
+    color: black;
+  }
 </style>
