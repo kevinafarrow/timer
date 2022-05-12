@@ -53,6 +53,10 @@ var app = (function () {
     function empty() {
         return text('');
     }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
     function attr(node, attribute, value) {
         if (value == null)
             node.removeAttribute(attribute);
@@ -156,6 +160,19 @@ var app = (function () {
     }
     const outroing = new Set();
     let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
     function transition_in(block, local) {
         if (block && block.i) {
             outroing.delete(block);
@@ -1253,7 +1270,11 @@ var app = (function () {
     			mount_component(clockdisplay, target, anchor);
     			current = true;
     		},
-    		p: noop,
+    		p(ctx, dirty) {
+    			const clockdisplay_changes = {};
+    			if (dirty & /*timers*/ 2) clockdisplay_changes.timers = /*timers*/ ctx[1];
+    			clockdisplay.$set(clockdisplay_changes);
+    		},
     		i(local) {
     			if (current) return;
     			transition_in(clockdisplay.$$.fragment, local);
@@ -1269,7 +1290,7 @@ var app = (function () {
     	};
     }
 
-    // (23:2) {#if numTimers > 1}
+    // (34:2) {#if timers.length > 1}
     function create_if_block(ctx) {
     	let planetdisplay;
     	let current;
@@ -1283,7 +1304,11 @@ var app = (function () {
     			mount_component(planetdisplay, target, anchor);
     			current = true;
     		},
-    		p: noop,
+    		p(ctx, dirty) {
+    			const planetdisplay_changes = {};
+    			if (dirty & /*timers*/ 2) planetdisplay_changes.timers = /*timers*/ ctx[1];
+    			planetdisplay.$set(planetdisplay_changes);
+    		},
     		i(local) {
     			if (current) return;
     			transition_in(planetdisplay.$$.fragment, local);
@@ -1306,12 +1331,16 @@ var app = (function () {
     	let t1;
     	let current_block_type_index;
     	let if_block;
+    	let t2;
+    	let button;
     	let current;
+    	let mounted;
+    	let dispose;
     	const if_block_creators = [create_if_block, create_else_block];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
-    		if (/*numTimers*/ ctx[2] > 1) return 0;
+    		if (/*timers*/ ctx[1].length > 1) return 0;
     		return 1;
     	}
 
@@ -1325,8 +1354,12 @@ var app = (function () {
     			t0 = text(/*name*/ ctx[0]);
     			t1 = space();
     			if_block.c();
-    			attr(h1, "class", "svelte-1ch9f7k");
-    			attr(main, "class", "svelte-1ch9f7k");
+    			t2 = space();
+    			button = element("button");
+    			button.textContent = "Demo toggle";
+    			attr(h1, "class", "svelte-wzont4");
+    			attr(button, "class", "svelte-wzont4");
+    			attr(main, "class", "svelte-wzont4");
     		},
     		m(target, anchor) {
     			insert(target, main, anchor);
@@ -1334,11 +1367,42 @@ var app = (function () {
     			append(h1, t0);
     			append(main, t1);
     			if_blocks[current_block_type_index].m(main, null);
+    			append(main, t2);
+    			append(main, button);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = listen(button, "click", /*toggleTimer*/ ctx[2]);
+    				mounted = true;
+    			}
     		},
     		p(ctx, [dirty]) {
     			if (!current || dirty & /*name*/ 1) set_data(t0, /*name*/ ctx[0]);
-    			if_block.p(ctx, dirty);
+    			let previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(ctx, dirty);
+    			} else {
+    				group_outros();
+
+    				transition_out(if_blocks[previous_block_index], 1, 1, () => {
+    					if_blocks[previous_block_index] = null;
+    				});
+
+    				check_outros();
+    				if_block = if_blocks[current_block_type_index];
+
+    				if (!if_block) {
+    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+    					if_block.c();
+    				} else {
+    					if_block.p(ctx, dirty);
+    				}
+
+    				transition_in(if_block, 1);
+    				if_block.m(main, t2);
+    			}
     		},
     		i(local) {
     			if (current) return;
@@ -1352,14 +1416,17 @@ var app = (function () {
     		d(detaching) {
     			if (detaching) detach(main);
     			if_blocks[current_block_type_index].d();
+    			mounted = false;
+    			dispose();
     		}
     	};
     }
 
     function instance($$self, $$props, $$invalidate) {
     	let { name } = $$props;
+    	let timers = [];
 
-    	let timers = [
+    	let timers_1 = [
     		{
     			"lane": "lane1",
     			"mask": "lane-mask1",
@@ -1369,13 +1436,74 @@ var app = (function () {
     		}
     	];
 
-    	let numTimers = timers.length;
+    	let timers_2 = [
+    		{
+    			"lane": "lane1",
+    			"mask": "lane-mask1",
+    			"border": 90,
+    			"duration": 70,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane2",
+    			"mask": "lane-mask2",
+    			"border": 84,
+    			"duration": 60,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane3",
+    			"mask": "lane-mask3",
+    			"border": 78,
+    			"duration": 50,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane4",
+    			"mask": "lane-mask4",
+    			"border": 72,
+    			"duration": 40,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane5",
+    			"mask": "lane-mask5",
+    			"border": 66,
+    			"duration": 30,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane6",
+    			"mask": "lane-mask6",
+    			"border": 60,
+    			"duration": 20,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane7",
+    			"mask": "lane-mask7",
+    			"border": 54,
+    			"duration": 10,
+    			"pos": 360
+    		}
+    	];
+
+    	timers.length;
+    	timers = timers_1;
+
+    	function toggleTimer() {
+    		if (timers === timers_1) {
+    			$$invalidate(1, timers = timers_2);
+    		} else if (timers === timers_2) {
+    			$$invalidate(1, timers = timers_1);
+    		}
+    	}
 
     	$$self.$$set = $$props => {
     		if ('name' in $$props) $$invalidate(0, name = $$props.name);
     	};
 
-    	return [name, timers, numTimers];
+    	return [name, timers, toggleTimer];
     }
 
     class App extends SvelteComponent {
