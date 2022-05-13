@@ -1,12 +1,13 @@
 <script>
-  import { onMount,onDestroy } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import Planet from './Planet.svelte';
+  import Hand from './Hand.svelte'
 
   export let timers = [];
-  let timer = timers[0];
 
   onMount(() => {
     const interval = setInterval(() => {
-      updatePosition();
+      updatePositions();
     }, 10);
 
     return () => {clearInterval(interval)};
@@ -16,16 +17,18 @@
     timers = [];
   });
 
-  function updatePosition() {
-    const step = 360 / (timer.duration * 100);
-    const newPos = timer.pos - step;
-    if (newPos <= 0) {
-      timer.pos = 0;
-      timers.pop();
-    } else {
-      timer.pos = newPos;
+  function updatePositions() {
+    for (var i = 0; i < timers.length; i++) {
+      const step = 360 / (timers[i].duration * 100);
+      const newPos = timers[i].pos - step;
+      if (newPos <= 0) {
+        timers[i].pos = 0;
+      } else {
+        timers[i].pos = newPos;
+      };
     };
   };
+  
 </script>
 
 <svg viewBox='-100 -100 200 200'>
@@ -63,16 +66,17 @@
       {/each}
     {/each}
   {/each}
-  <g class='hand' transform='rotate({timer.pos - 90})'>
-    <rect
-      width='{98 + 12}'
-      height='1'
-      y='-.5'
-      x='-12'
-    />
-    <circle class='hand-outer-circle' r=2 />
-    <circle class='hand-inner-circle' r=1 />
-  </g>
+
+  {#if timers.length === 1}
+    <Hand timer={timers[0]}/>
+    <p>{timers.length}</p>
+  {:else if timers.length > 1}
+    {#each timers as timer}
+      <Planet {timer}/>
+    {/each}
+  {:else}
+    <Hand timer={{"pos": 0}}/>
+  {/if}
 </svg>
 
 <style>
@@ -83,13 +87,8 @@
   .marker {
     fill: whitesmoke;
   }
-  .submarker{
+  .submarker {
     fill: #333;
   }
-  .hand, .hand-outer-circle {
-    fill: #ff3e00;
-  }
-  .hand-inner-circle {
-    fill: black;
-  }
+  
 </style>

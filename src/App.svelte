@@ -1,11 +1,10 @@
 <script>
   export let name;
-	import ClockDisplay from './ClockDisplay.svelte';
-	import PlanetDisplay from './PlanetDisplay.svelte';
+	import Clock from './Clock.svelte';
 
   let demos = [
     [
-      {"lane": "lane1", "mask": "lane-mask1", "border": 90, "duration": 30, "pos": 360},
+      {"lane": "lane1", "mask": "lane-mask1", "border": 90, "duration": 10, "pos": 360},
     ],
     [
       {"lane": "lane1", "mask": "lane-mask1", "clip": "lane-clip-path1", "border": 90, "duration": 70, "pos": 360},
@@ -59,7 +58,7 @@
   };
 
   function randTime() {
-    const time = Math.floor(Math.random() * 60);
+    const time = Math.floor(Math.random() * 10);
     return time;
   };
 
@@ -67,11 +66,7 @@
 
 <main>
 	<h1>{name}</h1>
-  {#if numTimers === 1}
-	  <ClockDisplay {timers}/>
-  {:else}
-	  <PlanetDisplay {timers}/>
-  {/if}
+	<Clock {timers}/>
   <h2>Demos</h2>
   <button on:click={previousDemo}>
     Prev

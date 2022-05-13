@@ -12,16 +12,16 @@
     <mask id="{timer.mask}">
       <rect width='100' height='100' transform='rotate({timer.pos - 180})' fill=#fff />
       {#if (timer.pos - 90) < 0}
-        <rect width='102' height='102' rx='-1' ry='-1' transform='rotate(-180)' fill=#000 />
+        <rect width='102' height='102' transform='rotate(-180)' fill=#000 />
       {/if}
       {#if (timer.pos - 90) > 0}
-        <rect width='102' height='102' rx='-1' ry='-1' transform='rotate(-90)' fill=#fff />
+        <rect width='102' height='102' transform='rotate(-90)' fill=#fff />
       {/if}
       {#if (timer.pos - 90) > 90}
-        <rect width='102' height='102' rx='-1' ry='-1' fill=#fff />
+        <rect width='102' height='102' fill=#fff />
       {/if}
       {#if (timer.pos - 90) > 180}
-        <rect width='102' height='102' rx='-1' ry='-1' transform='rotate(90)' fill=#fff />
+        <rect width='102' height='102' transform='rotate(90)' fill=#fff />
       {/if}
     </mask>
     <g class='lane' clip-path="url(#{timer.clip})" mask="url(#{timer.mask})">
