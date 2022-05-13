@@ -1194,25 +1194,25 @@ var app = (function () {
     			add_location(mask, file$2, 11, 4, 317);
     			attr_dev(circle1, "class", "lane-outer svelte-19568h8");
     			attr_dev(circle1, "r", circle1_r_value = /*timer*/ ctx[0].border - 2);
-    			add_location(circle1, file$2, 27, 6, 989);
+    			add_location(circle1, file$2, 27, 6, 1053);
     			attr_dev(circle2, "class", "lane-inner svelte-19568h8");
     			attr_dev(circle2, "r", circle2_r_value = /*timer*/ ctx[0].border - 3);
     			attr_dev(circle2, "rx", "-10");
-    			add_location(circle2, file$2, 28, 6, 1047);
+    			add_location(circle2, file$2, 28, 6, 1111);
     			attr_dev(g0, "class", "lane");
     			attr_dev(g0, "clip-path", g0_clip_path_value = "url(#" + /*timer*/ ctx[0].clip + ")");
     			attr_dev(g0, "mask", g0_mask_value = "url(#" + /*timer*/ ctx[0].mask + ")");
-    			add_location(g0, file$2, 26, 4, 909);
+    			add_location(g0, file$2, 26, 4, 973);
     			attr_dev(circle3, "class", "planet svelte-19568h8");
     			attr_dev(circle3, "r", "2.5");
     			attr_dev(circle3, "cx", circle3_cx_value = /*timer*/ ctx[0].border - 2.5);
     			attr_dev(circle3, "transform", circle3_transform_value = "rotate(" + (/*timer*/ ctx[0].pos - 90) + ")");
-    			add_location(circle3, file$2, 30, 4, 1121);
+    			add_location(circle3, file$2, 30, 4, 1185);
     			attr_dev(circle4, "class", "hole svelte-19568h8");
     			attr_dev(circle4, "r", "1.5");
     			attr_dev(circle4, "cx", circle4_cx_value = /*timer*/ ctx[0].border - 2.5);
     			attr_dev(circle4, "transform", circle4_transform_value = "rotate(" + (/*timer*/ ctx[0].pos - 90) + ")");
-    			add_location(circle4, file$2, 31, 4, 1221);
+    			add_location(circle4, file$2, 31, 4, 1285);
     			attr_dev(g1, "class", g1_class_value = "" + (null_to_empty(/*timer*/ ctx[0].lane) + " svelte-19568h8"));
     			add_location(g1, file$2, 7, 2, 117);
     		},
@@ -1377,8 +1377,10 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "100");
-    			attr_dev(rect, "height", "100");
+    			attr_dev(rect, "width", "101");
+    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "rx", "-1");
+    			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(-180)");
     			attr_dev(rect, "fill", "#000");
     			add_location(rect, file$2, 14, 8, 471);
@@ -1409,11 +1411,13 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "100");
-    			attr_dev(rect, "height", "100");
+    			attr_dev(rect, "width", "101");
+    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "rx", "-1");
+    			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(-90)");
     			attr_dev(rect, "fill", "#fff");
-    			add_location(rect, file$2, 17, 8, 593);
+    			add_location(rect, file$2, 17, 8, 609);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, rect, anchor);
@@ -1441,10 +1445,12 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "100");
-    			attr_dev(rect, "height", "100");
+    			attr_dev(rect, "width", "101");
+    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "rx", "-1");
+    			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "fill", "#fff");
-    			add_location(rect, file$2, 20, 8, 715);
+    			add_location(rect, file$2, 20, 8, 747);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, rect, anchor);
@@ -1472,11 +1478,13 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "100");
-    			attr_dev(rect, "height", "100");
+    			attr_dev(rect, "width", "101");
+    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "rx", "-1");
+    			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(90)");
     			attr_dev(rect, "fill", "#fff");
-    			add_location(rect, file$2, 23, 8, 814);
+    			add_location(rect, file$2, 23, 8, 862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, rect, anchor);
