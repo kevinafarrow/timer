@@ -26,8 +26,8 @@
     </mask>
     <g class='lane' clip-path="url(#{timer.clip})" mask="url(#{timer.mask})">
       <circle class='lane-outer' r='{timer.border - 2}'/>
-      <circle class='lane-inner' r='{timer.border - 3}' rx='-10'/>
     </g>
+    <circle class='lane-inner' r='{timer.border - 3}' rx='-10'/>
     <circle class='planet' r='2.5' cx='{timer.border - 2.5}' transform='rotate({timer.pos - 90})'/>
     <circle class='hole' r='1.5' cx='{timer.border - 2.5}' transform='rotate({timer.pos - 90})'/>
   </g>

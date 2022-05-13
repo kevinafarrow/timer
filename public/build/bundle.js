@@ -1142,10 +1142,10 @@ var app = (function () {
     	let g0;
     	let circle1;
     	let circle1_r_value;
-    	let circle2;
-    	let circle2_r_value;
     	let g0_clip_path_value;
     	let g0_mask_value;
+    	let circle2;
+    	let circle2_r_value;
     	let circle3;
     	let circle3_cx_value;
     	let circle3_transform_value;
@@ -1195,24 +1195,24 @@ var app = (function () {
     			attr_dev(circle1, "class", "lane-outer svelte-19568h8");
     			attr_dev(circle1, "r", circle1_r_value = /*timer*/ ctx[0].border - 2);
     			add_location(circle1, file$2, 27, 6, 1053);
-    			attr_dev(circle2, "class", "lane-inner svelte-19568h8");
-    			attr_dev(circle2, "r", circle2_r_value = /*timer*/ ctx[0].border - 3);
-    			attr_dev(circle2, "rx", "-10");
-    			add_location(circle2, file$2, 28, 6, 1111);
     			attr_dev(g0, "class", "lane");
     			attr_dev(g0, "clip-path", g0_clip_path_value = "url(#" + /*timer*/ ctx[0].clip + ")");
     			attr_dev(g0, "mask", g0_mask_value = "url(#" + /*timer*/ ctx[0].mask + ")");
     			add_location(g0, file$2, 26, 4, 973);
+    			attr_dev(circle2, "class", "lane-inner svelte-19568h8");
+    			attr_dev(circle2, "r", circle2_r_value = /*timer*/ ctx[0].border - 3);
+    			attr_dev(circle2, "rx", "-10");
+    			add_location(circle2, file$2, 29, 4, 1118);
     			attr_dev(circle3, "class", "planet svelte-19568h8");
     			attr_dev(circle3, "r", "2.5");
     			attr_dev(circle3, "cx", circle3_cx_value = /*timer*/ ctx[0].border - 2.5);
     			attr_dev(circle3, "transform", circle3_transform_value = "rotate(" + (/*timer*/ ctx[0].pos - 90) + ")");
-    			add_location(circle3, file$2, 30, 4, 1185);
+    			add_location(circle3, file$2, 30, 4, 1183);
     			attr_dev(circle4, "class", "hole svelte-19568h8");
     			attr_dev(circle4, "r", "1.5");
     			attr_dev(circle4, "cx", circle4_cx_value = /*timer*/ ctx[0].border - 2.5);
     			attr_dev(circle4, "transform", circle4_transform_value = "rotate(" + (/*timer*/ ctx[0].pos - 90) + ")");
-    			add_location(circle4, file$2, 31, 4, 1285);
+    			add_location(circle4, file$2, 31, 4, 1283);
     			attr_dev(g1, "class", g1_class_value = "" + (null_to_empty(/*timer*/ ctx[0].lane) + " svelte-19568h8"));
     			add_location(g1, file$2, 7, 2, 117);
     		},
@@ -1231,7 +1231,7 @@ var app = (function () {
     			if (if_block3) if_block3.m(mask, null);
     			append_dev(g1, g0);
     			append_dev(g0, circle1);
-    			append_dev(g0, circle2);
+    			append_dev(g1, circle2);
     			append_dev(g1, circle3);
     			append_dev(g1, circle4);
     			current = true;
@@ -1301,16 +1301,16 @@ var app = (function () {
     				attr_dev(circle1, "r", circle1_r_value);
     			}
 
-    			if (!current || dirty & /*timer*/ 1 && circle2_r_value !== (circle2_r_value = /*timer*/ ctx[0].border - 3)) {
-    				attr_dev(circle2, "r", circle2_r_value);
-    			}
-
     			if (!current || dirty & /*timer*/ 1 && g0_clip_path_value !== (g0_clip_path_value = "url(#" + /*timer*/ ctx[0].clip + ")")) {
     				attr_dev(g0, "clip-path", g0_clip_path_value);
     			}
 
     			if (!current || dirty & /*timer*/ 1 && g0_mask_value !== (g0_mask_value = "url(#" + /*timer*/ ctx[0].mask + ")")) {
     				attr_dev(g0, "mask", g0_mask_value);
+    			}
+
+    			if (!current || dirty & /*timer*/ 1 && circle2_r_value !== (circle2_r_value = /*timer*/ ctx[0].border - 3)) {
+    				attr_dev(circle2, "r", circle2_r_value);
     			}
 
     			if (!current || dirty & /*timer*/ 1 && circle3_cx_value !== (circle3_cx_value = /*timer*/ ctx[0].border - 2.5)) {
