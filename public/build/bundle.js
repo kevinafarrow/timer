@@ -1377,8 +1377,8 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "101");
-    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "width", "102");
+    			attr_dev(rect, "height", "102");
     			attr_dev(rect, "rx", "-1");
     			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(-180)");
@@ -1411,8 +1411,8 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "101");
-    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "width", "102");
+    			attr_dev(rect, "height", "102");
     			attr_dev(rect, "rx", "-1");
     			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(-90)");
@@ -1445,8 +1445,8 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "101");
-    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "width", "102");
+    			attr_dev(rect, "height", "102");
     			attr_dev(rect, "rx", "-1");
     			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "fill", "#fff");
@@ -1478,8 +1478,8 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			rect = svg_element("rect");
-    			attr_dev(rect, "width", "101");
-    			attr_dev(rect, "height", "101");
+    			attr_dev(rect, "width", "102");
+    			attr_dev(rect, "height", "102");
     			attr_dev(rect, "rx", "-1");
     			attr_dev(rect, "ry", "-1");
     			attr_dev(rect, "transform", "rotate(90)");
