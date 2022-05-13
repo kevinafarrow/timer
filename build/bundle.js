@@ -1178,8 +1178,10 @@ var app = (function () {
     	return {
     		c() {
     			rect = svg_element("rect");
-    			attr(rect, "width", "100");
-    			attr(rect, "height", "100");
+    			attr(rect, "width", "101");
+    			attr(rect, "height", "101");
+    			attr(rect, "rx", "-1");
+    			attr(rect, "ry", "-1");
     			attr(rect, "transform", "rotate(-180)");
     			attr(rect, "fill", "#000");
     		},
@@ -1199,8 +1201,10 @@ var app = (function () {
     	return {
     		c() {
     			rect = svg_element("rect");
-    			attr(rect, "width", "100");
-    			attr(rect, "height", "100");
+    			attr(rect, "width", "101");
+    			attr(rect, "height", "101");
+    			attr(rect, "rx", "-1");
+    			attr(rect, "ry", "-1");
     			attr(rect, "transform", "rotate(-90)");
     			attr(rect, "fill", "#fff");
     		},
@@ -1220,8 +1224,10 @@ var app = (function () {
     	return {
     		c() {
     			rect = svg_element("rect");
-    			attr(rect, "width", "100");
-    			attr(rect, "height", "100");
+    			attr(rect, "width", "101");
+    			attr(rect, "height", "101");
+    			attr(rect, "rx", "-1");
+    			attr(rect, "ry", "-1");
     			attr(rect, "fill", "#fff");
     		},
     		m(target, anchor) {
@@ -1240,8 +1246,10 @@ var app = (function () {
     	return {
     		c() {
     			rect = svg_element("rect");
-    			attr(rect, "width", "100");
-    			attr(rect, "height", "100");
+    			attr(rect, "width", "101");
+    			attr(rect, "height", "101");
+    			attr(rect, "rx", "-1");
+    			attr(rect, "ry", "-1");
     			attr(rect, "transform", "rotate(90)");
     			attr(rect, "fill", "#fff");
     		},
