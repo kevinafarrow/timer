@@ -1,11 +1,20 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
+  import Planet from './Planet.svelte';
 
   export let timers = [];
 
-  setInterval(() => {
-    updatePositions();
-  }, 10);
+  onMount(() => {
+    const interval = setInterval(() => {
+      updatePositions();
+    }, 10);
+
+    return () => {clearInterval(interval)};
+  });
+
+  onDestroy(() => {
+    timers = [];
+  });
 
   function updatePositions() {
     for (var i = 0; i < timers.length; i++) {
@@ -18,7 +27,7 @@
       };
     };
   };
-
+  
 </script>
 
 <svg viewBox='-100 -100 200 200'>
@@ -58,33 +67,9 @@
   {/each}
 
   {#each timers as timer}
-    <g class='{timer.lane}'>
-      <clipPath id="lane-clip-path">
-        <circle id="theCircle" r='{timer.border}'/>
-      </clipPath>
-      <mask id="{timer.mask}">
-        <rect width='100' height='100' transform='rotate({timer.pos - 180})' fill=#fff />
-        {#if (timer.pos - 90) < 0}
-          <rect width='100' height='100' transform='rotate(-180)' fill=#000 />
-        {/if}
-        {#if (timer.pos - 90) > 0}
-          <rect width='100' height='100' transform='rotate(-90)' fill=#fff />
-        {/if}
-        {#if (timer.pos - 90) > 90}
-          <rect width='100' height='100' fill=#fff />
-        {/if}
-        {#if (timer.pos - 90) > 180}
-          <rect width='100' height='100' transform='rotate(90)' fill=#fff />
-        {/if}
-      </mask>
-      <g class='lane' clip-path="url(#lane-clip-path)" mask="url(#{timer.mask})">
-        <circle class='lane-outer' r='{timer.border - 2}'/>
-        <circle class='lane-inner' r='{timer.border - 3}' rx='-10'/>
-      </g>
-      <circle class='planet' r='2.5' cx='{timer.border - 2.5}' transform='rotate({timer.pos - 90})'/>
-      <circle class='hole' r='1.5' cx='{timer.border - 2.5}' transform='rotate({timer.pos - 90})'/>
-    </g>
+    <Planet {timer}/>
   {/each}
+  <circle class='test' r=20/>
 </svg>
 
 <style>
@@ -98,39 +83,5 @@
   .submarker {
     fill: #333;
   }
-  .lane1 {
-    fill: #ff3e00;
-  }
-  .lane2 {
-    fill: #00ffa2;
-  }
-  .lane3 {
-    fill: #ff9900;
-  }
-  .lane4 {
-    fill: #005eff;
-  }
-  .lane5 {
-    fill: #fff200;
-  }
-  .lane6 {
-    fill: #8000ff;
-  }
-  .lane7 {
-    fill: #ffffff;
-  }
-  .lane-outer {
-    position: absolute;
-    fill: inherit;
-    overflow: hidden;
-  }
-  .lane-inner {
-    fill: black;
-  }
-  .planet {
-    fill: inherit;
-  }
-  .hole {
-    fill: black;
-  }
+  
 </style>

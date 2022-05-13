@@ -1,18 +1,27 @@
 <script>
-  import { onMount } from 'svelte';
+  import { onMount,onDestroy } from 'svelte';
 
   export let timers = [];
   let timer = timers[0];
-  console.log(timer.lane);
-  setInterval(() => {
-    updatePosition();
-  }, 10);
+
+  onMount(() => {
+    const interval = setInterval(() => {
+      updatePosition();
+    }, 10);
+
+    return () => {clearInterval(interval)};
+  });
+
+  onDestroy(() => {
+    timers = [];
+  });
 
   function updatePosition() {
     const step = 360 / (timer.duration * 100);
     const newPos = timer.pos - step;
     if (newPos <= 0) {
       timer.pos = 0;
+      timers.pop();
     } else {
       timer.pos = newPos;
     };
