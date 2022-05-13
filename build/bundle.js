@@ -963,10 +963,10 @@ var app = (function () {
     	let g0;
     	let circle1;
     	let circle1_r_value;
-    	let circle2;
-    	let circle2_r_value;
     	let g0_clip_path_value;
     	let g0_mask_value;
+    	let circle2;
+    	let circle2_r_value;
     	let circle3;
     	let circle3_cx_value;
     	let circle3_transform_value;
@@ -1011,12 +1011,12 @@ var app = (function () {
     			attr(mask, "id", mask_id_value = /*timer*/ ctx[0].mask);
     			attr(circle1, "class", "lane-outer svelte-19568h8");
     			attr(circle1, "r", circle1_r_value = /*timer*/ ctx[0].border - 2);
-    			attr(circle2, "class", "lane-inner svelte-19568h8");
-    			attr(circle2, "r", circle2_r_value = /*timer*/ ctx[0].border - 3);
-    			attr(circle2, "rx", "-10");
     			attr(g0, "class", "lane");
     			attr(g0, "clip-path", g0_clip_path_value = "url(#" + /*timer*/ ctx[0].clip + ")");
     			attr(g0, "mask", g0_mask_value = "url(#" + /*timer*/ ctx[0].mask + ")");
+    			attr(circle2, "class", "lane-inner svelte-19568h8");
+    			attr(circle2, "r", circle2_r_value = /*timer*/ ctx[0].border - 3);
+    			attr(circle2, "rx", "-10");
     			attr(circle3, "class", "planet svelte-19568h8");
     			attr(circle3, "r", "2.5");
     			attr(circle3, "cx", circle3_cx_value = /*timer*/ ctx[0].border - 2.5);
@@ -1042,7 +1042,7 @@ var app = (function () {
     			if (if_block3) if_block3.m(mask, null);
     			append(g1, g0);
     			append(g0, circle1);
-    			append(g0, circle2);
+    			append(g1, circle2);
     			append(g1, circle3);
     			append(g1, circle4);
     			current = true;
@@ -1112,16 +1112,16 @@ var app = (function () {
     				attr(circle1, "r", circle1_r_value);
     			}
 
-    			if (!current || dirty & /*timer*/ 1 && circle2_r_value !== (circle2_r_value = /*timer*/ ctx[0].border - 3)) {
-    				attr(circle2, "r", circle2_r_value);
-    			}
-
     			if (!current || dirty & /*timer*/ 1 && g0_clip_path_value !== (g0_clip_path_value = "url(#" + /*timer*/ ctx[0].clip + ")")) {
     				attr(g0, "clip-path", g0_clip_path_value);
     			}
 
     			if (!current || dirty & /*timer*/ 1 && g0_mask_value !== (g0_mask_value = "url(#" + /*timer*/ ctx[0].mask + ")")) {
     				attr(g0, "mask", g0_mask_value);
+    			}
+
+    			if (!current || dirty & /*timer*/ 1 && circle2_r_value !== (circle2_r_value = /*timer*/ ctx[0].border - 3)) {
+    				attr(circle2, "r", circle2_r_value);
     			}
 
     			if (!current || dirty & /*timer*/ 1 && circle3_cx_value !== (circle3_cx_value = /*timer*/ ctx[0].border - 2.5)) {
