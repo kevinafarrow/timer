@@ -1,6 +1,9 @@
 <script>
   export let name;
 	import Clock from './Clock.svelte';
+  import { count } from './stores.js';
+  import { onMount } from 'svelte';
+  import NumberPad from './NumberPad.svelte';
 
   let demos = [
     [
@@ -37,6 +40,7 @@
   let selectedDemo = 0;
   let timers = demos[selectedDemo];
   let numTimers = timers.length;
+  let timerTime = '';
 
   $: timers = JSON.parse(JSON.stringify(demos[selectedDemo]));
   $: numTimers = timers.length;
@@ -62,18 +66,39 @@
     return time;
   };
 
+  let countValue;
+
+  count.subscribe(value => {
+		countValue = value;
+	});
+
+  onMount(() => {
+    const interval = setInterval(() => {
+      decrement();
+    }, 10);
+
+    return () => {clearInterval(interval)};
+  });
+
+  function decrement() {
+    if (countValue > 0) {
+      count.update(n => n - 10);
+    }
+  }
+
+  function handleTimerTime(event) {
+    console.log(event);
+    const timer = {"lane": "lane2", "mask": "lane-mask2", "border": 84, "duration": event.detail.time, "pos": 360}
+    timers.push(timer);
+  }
+
 </script>
 
 <main>
 	<h1>{name}</h1>
 	<Clock {timers}/>
-  <h2>Demos</h2>
-  <button on:click={previousDemo}>
-    Prev
-  </button>
-  <button on:click={nextDemo}>
-    Next 
-  </button>
+  <p>{timerTime}</p>
+  <NumberPad on:newTimer={handleTimerTime}/>
 
 </main>
 
