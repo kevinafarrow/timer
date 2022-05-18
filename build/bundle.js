@@ -2243,8 +2243,71 @@ var app = (function () {
     	];
 
     	let selectedDemo = 0;
-    	let timers = demos[selectedDemo];
+
+    	//let timers = demos[selectedDemo];
+    	let timers = [];
+
     	timers.length;
+    	let addPosition = 1;
+
+    	let lanes = [
+    		{
+    			"lane": "lane1",
+    			"mask": "lane-mask1",
+    			"clip": "lane-clip-path1",
+    			"border": 90,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane2",
+    			"mask": "lane-mask2",
+    			"clip": "lane-clip-path2",
+    			"border": 84,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane3",
+    			"mask": "lane-mask3",
+    			"clip": "lane-clip-path3",
+    			"border": 78,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane4",
+    			"mask": "lane-mask4",
+    			"clip": "lane-clip-path4",
+    			"border": 72,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane5",
+    			"mask": "lane-mask5",
+    			"clip": "lane-clip-path5",
+    			"border": 66,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane6",
+    			"mask": "lane-mask6",
+    			"clip": "lane-clip-path6",
+    			"border": 60,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane7",
+    			"mask": "lane-mask7",
+    			"clip": "lane-clip-path7",
+    			"border": 54,
+    			"duration": 0,
+    			"pos": 360
+    		}
+    	];
 
     	function nextDemo() {
     		if (selectedDemo === demos.length - 1) {
@@ -2267,16 +2330,11 @@ var app = (function () {
 
     	function handleTimerTime(event) {
     		console.log(event);
-
-    		const timer = {
-    			"lane": "lane2",
-    			"mask": "lane-mask2",
-    			"border": 84,
-    			"duration": event.detail.time,
-    			"pos": 360
-    		};
-
+    		const timer = lanes[addPosition];
+    		timer.duration = event.detail.time;
+    		timer.pos = 360;
     		timers.push(timer);
+    		addPosition = (addPosition + 1) % lanes.length;
     	}
 
     	$$self.$$set = $$props => {
