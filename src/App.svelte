@@ -62,7 +62,7 @@
   };
 
   function randTime() {
-    const time = Math.floor(Math.random() * 10);
+    const time = Math.floor(Math.random() * 60);
     return time;
   };
 
@@ -71,20 +71,6 @@
   count.subscribe(value => {
 		countValue = value;
 	});
-
-  onMount(() => {
-    const interval = setInterval(() => {
-      decrement();
-    }, 10);
-
-    return () => {clearInterval(interval)};
-  });
-
-  function decrement() {
-    if (countValue > 0) {
-      count.update(n => n - 10);
-    }
-  }
 
   function handleTimerTime(event) {
     console.log(event);
@@ -99,6 +85,9 @@
 	<Clock {timers}/>
   <p>{timerTime}</p>
   <NumberPad on:newTimer={handleTimerTime}/>
+  <h2>Demos</h2>
+  <button on:click={previousDemo}>Prev</button>
+  <button on:click={nextDemo}>Next</button>
 
 </main>
 

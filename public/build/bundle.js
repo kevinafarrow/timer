@@ -2451,7 +2451,15 @@ var app = (function () {
     	let p;
     	let t4;
     	let numberpad;
+    	let t5;
+    	let h2;
+    	let t7;
+    	let button0;
+    	let t9;
+    	let button1;
     	let current;
+    	let mounted;
+    	let dispose;
 
     	clock = new Clock({
     			props: { timers: /*timers*/ ctx[1] },
@@ -2459,7 +2467,7 @@ var app = (function () {
     		});
 
     	numberpad = new NumberPad({ $$inline: true });
-    	numberpad.$on("newTimer", /*handleTimerTime*/ ctx[3]);
+    	numberpad.$on("newTimer", /*handleTimerTime*/ ctx[5]);
 
     	const block = {
     		c: function create() {
@@ -2473,12 +2481,27 @@ var app = (function () {
     			p.textContent = `${/*timerTime*/ ctx[2]}`;
     			t4 = space();
     			create_component(numberpad.$$.fragment);
+    			t5 = space();
+    			h2 = element("h2");
+    			h2.textContent = "Demos";
+    			t7 = space();
+    			button0 = element("button");
+    			button0.textContent = "Prev";
+    			t9 = space();
+    			button1 = element("button");
+    			button1.textContent = "Next";
     			attr_dev(h1, "class", "svelte-182dsa2");
-    			add_location(h1, file, 97, 1, 3969);
+    			add_location(h1, file, 83, 1, 3732);
     			attr_dev(p, "class", "svelte-182dsa2");
-    			add_location(p, file, 99, 2, 4006);
+    			add_location(p, file, 85, 2, 3769);
+    			attr_dev(h2, "class", "svelte-182dsa2");
+    			add_location(h2, file, 87, 2, 3835);
+    			attr_dev(button0, "class", "svelte-182dsa2");
+    			add_location(button0, file, 88, 2, 3852);
+    			attr_dev(button1, "class", "svelte-182dsa2");
+    			add_location(button1, file, 89, 2, 3900);
     			attr_dev(main, "class", "svelte-182dsa2");
-    			add_location(main, file, 96, 0, 3961);
+    			add_location(main, file, 82, 0, 3724);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2493,7 +2516,22 @@ var app = (function () {
     			append_dev(main, p);
     			append_dev(main, t4);
     			mount_component(numberpad, main, null);
+    			append_dev(main, t5);
+    			append_dev(main, h2);
+    			append_dev(main, t7);
+    			append_dev(main, button0);
+    			append_dev(main, t9);
+    			append_dev(main, button1);
     			current = true;
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(button0, "click", /*previousDemo*/ ctx[4], false, false, false),
+    					listen_dev(button1, "click", /*nextDemo*/ ctx[3], false, false, false)
+    				];
+
+    				mounted = true;
+    			}
     		},
     		p: function update(ctx, [dirty]) {
     			if (!current || dirty & /*name*/ 1) set_data_dev(t0, /*name*/ ctx[0]);
@@ -2516,6 +2554,8 @@ var app = (function () {
     			if (detaching) detach_dev(main);
     			destroy_component(clock);
     			destroy_component(numberpad);
+    			mounted = false;
+    			run_all(dispose);
     		}
     	};
 
@@ -2531,7 +2571,7 @@ var app = (function () {
     }
 
     function randTime() {
-    	const time = Math.floor(Math.random() * 10);
+    	const time = Math.floor(Math.random() * 60);
     	return time;
     }
 
@@ -2733,17 +2773,17 @@ var app = (function () {
 
     	function nextDemo() {
     		if (selectedDemo === demos.length - 1) {
-    			$$invalidate(4, selectedDemo = 0);
+    			$$invalidate(6, selectedDemo = 0);
     		} else {
-    			$$invalidate(4, selectedDemo++, selectedDemo);
+    			$$invalidate(6, selectedDemo++, selectedDemo);
     		}
     	}
 
     	function previousDemo() {
     		if (selectedDemo === 0) {
-    			$$invalidate(4, selectedDemo = demos.length - 1);
+    			$$invalidate(6, selectedDemo = demos.length - 1);
     		} else {
-    			$$invalidate(4, selectedDemo--, selectedDemo);
+    			$$invalidate(6, selectedDemo--, selectedDemo);
     		}
     	}
     	let countValue;
@@ -2751,25 +2791,6 @@ var app = (function () {
     	count.subscribe(value => {
     		countValue = value;
     	});
-
-    	onMount(() => {
-    		const interval = setInterval(
-    			() => {
-    				decrement();
-    			},
-    			10
-    		);
-
-    		return () => {
-    			clearInterval(interval);
-    		};
-    	});
-
-    	function decrement() {
-    		if (countValue > 0) {
-    			count.update(n => n - 10);
-    		}
-    	}
 
     	function handleTimerTime(event) {
     		console.log(event);
@@ -2810,14 +2831,13 @@ var app = (function () {
     		previousDemo,
     		randTime,
     		countValue,
-    		decrement,
     		handleTimerTime
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('name' in $$props) $$invalidate(0, name = $$props.name);
-    		if ('demos' in $$props) $$invalidate(7, demos = $$props.demos);
-    		if ('selectedDemo' in $$props) $$invalidate(4, selectedDemo = $$props.selectedDemo);
+    		if ('demos' in $$props) $$invalidate(9, demos = $$props.demos);
+    		if ('selectedDemo' in $$props) $$invalidate(6, selectedDemo = $$props.selectedDemo);
     		if ('timers' in $$props) $$invalidate(1, timers = $$props.timers);
     		if ('numTimers' in $$props) numTimers = $$props.numTimers;
     		if ('timerTime' in $$props) $$invalidate(2, timerTime = $$props.timerTime);
@@ -2829,7 +2849,7 @@ var app = (function () {
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*selectedDemo*/ 16) {
+    		if ($$self.$$.dirty & /*selectedDemo*/ 64) {
     			$$invalidate(1, timers = JSON.parse(JSON.stringify(demos[selectedDemo])));
     		}
 
@@ -2838,7 +2858,7 @@ var app = (function () {
     		}
     	};
 
-    	return [name, timers, timerTime, handleTimerTime, selectedDemo];
+    	return [name, timers, timerTime, nextDemo, previousDemo, handleTimerTime, selectedDemo];
     }
 
     class App extends SvelteComponentDev {
