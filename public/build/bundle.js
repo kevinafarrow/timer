@@ -2491,17 +2491,17 @@ var app = (function () {
     			button1 = element("button");
     			button1.textContent = "Next";
     			attr_dev(h1, "class", "svelte-182dsa2");
-    			add_location(h1, file, 83, 1, 3732);
+    			add_location(h1, file, 97, 1, 4637);
     			attr_dev(p, "class", "svelte-182dsa2");
-    			add_location(p, file, 85, 2, 3769);
+    			add_location(p, file, 99, 2, 4674);
     			attr_dev(h2, "class", "svelte-182dsa2");
-    			add_location(h2, file, 87, 2, 3835);
+    			add_location(h2, file, 101, 2, 4740);
     			attr_dev(button0, "class", "svelte-182dsa2");
-    			add_location(button0, file, 88, 2, 3852);
+    			add_location(button0, file, 102, 2, 4757);
     			attr_dev(button1, "class", "svelte-182dsa2");
-    			add_location(button1, file, 89, 2, 3900);
+    			add_location(button1, file, 103, 2, 4805);
     			attr_dev(main, "class", "svelte-182dsa2");
-    			add_location(main, file, 82, 0, 3724);
+    			add_location(main, file, 96, 0, 4629);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2767,9 +2767,72 @@ var app = (function () {
     	];
 
     	let selectedDemo = 0;
-    	let timers = demos[selectedDemo];
+
+    	//let timers = demos[selectedDemo];
+    	let timers = [];
+
     	let numTimers = timers.length;
     	let timerTime = '';
+    	let addPosition = 1;
+
+    	let lanes = [
+    		{
+    			"lane": "lane1",
+    			"mask": "lane-mask1",
+    			"clip": "lane-clip-path1",
+    			"border": 90,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane2",
+    			"mask": "lane-mask2",
+    			"clip": "lane-clip-path2",
+    			"border": 84,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane3",
+    			"mask": "lane-mask3",
+    			"clip": "lane-clip-path3",
+    			"border": 78,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane4",
+    			"mask": "lane-mask4",
+    			"clip": "lane-clip-path4",
+    			"border": 72,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane5",
+    			"mask": "lane-mask5",
+    			"clip": "lane-clip-path5",
+    			"border": 66,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane6",
+    			"mask": "lane-mask6",
+    			"clip": "lane-clip-path6",
+    			"border": 60,
+    			"duration": 0,
+    			"pos": 360
+    		},
+    		{
+    			"lane": "lane7",
+    			"mask": "lane-mask7",
+    			"clip": "lane-clip-path7",
+    			"border": 54,
+    			"duration": 0,
+    			"pos": 360
+    		}
+    	];
 
     	function nextDemo() {
     		if (selectedDemo === demos.length - 1) {
@@ -2794,16 +2857,11 @@ var app = (function () {
 
     	function handleTimerTime(event) {
     		console.log(event);
-
-    		const timer = {
-    			"lane": "lane2",
-    			"mask": "lane-mask2",
-    			"border": 84,
-    			"duration": event.detail.time,
-    			"pos": 360
-    		};
-
+    		const timer = lanes[addPosition];
+    		timer.duration = event.detail.time;
+    		timer.pos = 360;
     		timers.push(timer);
+    		addPosition = (addPosition + 1) % lanes.length;
     	}
 
     	const writable_props = ['name'];
@@ -2827,6 +2885,8 @@ var app = (function () {
     		timers,
     		numTimers,
     		timerTime,
+    		addPosition,
+    		lanes,
     		nextDemo,
     		previousDemo,
     		randTime,
@@ -2836,11 +2896,13 @@ var app = (function () {
 
     	$$self.$inject_state = $$props => {
     		if ('name' in $$props) $$invalidate(0, name = $$props.name);
-    		if ('demos' in $$props) $$invalidate(9, demos = $$props.demos);
+    		if ('demos' in $$props) $$invalidate(10, demos = $$props.demos);
     		if ('selectedDemo' in $$props) $$invalidate(6, selectedDemo = $$props.selectedDemo);
     		if ('timers' in $$props) $$invalidate(1, timers = $$props.timers);
     		if ('numTimers' in $$props) numTimers = $$props.numTimers;
     		if ('timerTime' in $$props) $$invalidate(2, timerTime = $$props.timerTime);
+    		if ('addPosition' in $$props) addPosition = $$props.addPosition;
+    		if ('lanes' in $$props) lanes = $$props.lanes;
     		if ('countValue' in $$props) countValue = $$props.countValue;
     	};
 
