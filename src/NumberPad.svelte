@@ -12,7 +12,8 @@
 	const dispatch = createEventDispatcher();
 
   function createTimer() {
-    const newTimerDuration = (timerHours * 60 * 60) + (timerMinutes * 60) + timerSeconds
+    const newTimerDuration = parseInt(timerHours * 60 * 60) + parseInt(timerMinutes * 60) + parseInt(timerSeconds);
+    console.log('Timer duration: ' + newTimerDuration);
     dispatch('newTimer', {
       time: newTimerDuration
     });

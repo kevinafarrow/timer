@@ -2100,7 +2100,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (35:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}
+    // (36:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}
     function create_each_block(ctx) {
     	let button;
     	let t_value = /*number*/ ctx[13] + "";
@@ -2117,7 +2117,7 @@ var app = (function () {
     			button = element("button");
     			t = text(t_value);
     			attr_dev(button, "class", "svelte-1bevqz9");
-    			add_location(button, file$1, 35, 3, 1024);
+    			add_location(button, file$1, 36, 3, 1107);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -2142,7 +2142,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(35:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}",
+    		source: "(36:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}",
     		ctx
     	});
 
@@ -2203,19 +2203,19 @@ var app = (function () {
     			button2 = element("button");
     			button2.textContent = "submit";
     			attr_dev(h10, "class", "svelte-1bevqz9");
-    			add_location(h10, file$1, 31, 2, 873);
+    			add_location(h10, file$1, 32, 2, 956);
     			attr_dev(h11, "class", "svelte-1bevqz9");
-    			add_location(h11, file$1, 32, 2, 899);
+    			add_location(h11, file$1, 33, 2, 982);
     			attr_dev(h12, "class", "svelte-1bevqz9");
-    			add_location(h12, file$1, 33, 2, 927);
+    			add_location(h12, file$1, 34, 2, 1010);
     			attr_dev(button0, "class", "svelte-1bevqz9");
-    			add_location(button0, file$1, 38, 1, 1094);
+    			add_location(button0, file$1, 39, 1, 1177);
     			attr_dev(button1, "class", "svelte-1bevqz9");
-    			add_location(button1, file$1, 39, 1, 1135);
+    			add_location(button1, file$1, 40, 1, 1218);
     			attr_dev(button2, "class", "svelte-1bevqz9");
-    			add_location(button2, file$1, 40, 1, 1182);
+    			add_location(button2, file$1, 41, 1, 1265);
     			attr_dev(div, "class", "keypad svelte-1bevqz9");
-    			add_location(div, file$1, 30, 0, 850);
+    			add_location(div, file$1, 31, 0, 933);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2330,7 +2330,8 @@ var app = (function () {
     	const dispatch = createEventDispatcher();
 
     	function createTimer() {
-    		const newTimerDuration = timerHours * 60 * 60 + timerMinutes * 60 + timerSeconds;
+    		const newTimerDuration = parseInt(timerHours * 60 * 60) + parseInt(timerMinutes * 60) + parseInt(timerSeconds);
+    		console.log('Timer duration: ' + newTimerDuration);
     		dispatch('newTimer', { time: newTimerDuration });
     		clear();
     	}
