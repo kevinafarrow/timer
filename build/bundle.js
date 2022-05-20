@@ -1687,7 +1687,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (35:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}
+    // (36:2) {#each [...Array(9).keys()].map((i) => {return i + 1}) as number}
     function create_each_block(ctx) {
     	let button;
     	let t_value = /*number*/ ctx[13] + "";
@@ -1875,7 +1875,8 @@ var app = (function () {
     	const dispatch = createEventDispatcher();
 
     	function createTimer() {
-    		const newTimerDuration = timerHours * 60 * 60 + timerMinutes * 60 + timerSeconds;
+    		const newTimerDuration = parseInt(timerHours * 60 * 60) + parseInt(timerMinutes * 60) + parseInt(timerSeconds);
+    		console.log('Timer duration: ' + newTimerDuration);
     		dispatch('newTimer', { time: newTimerDuration });
     		clear();
     	}
